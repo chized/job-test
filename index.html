@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>    
+  </head>
+  <body>   
+
+        <div class="container-md">
+            <form id="add_product_form" class="row g-3 mt-3">
+                <h1>My Form!</h1>
+                <div class="form-group col-12">
+                  <label for="product_name" class="form-label">Product Name</label>
+                  <input type="product_name" class="form-control" id="product_name" placeholder="Product Name">
+                 </div>
+                <div class="form-group col-12">
+                  <label for="qty_stock" class="form-label">Quantity in stock</label>
+                  <input type="text" class="form-control" id="qty_stock" placeholder="Quantity in stock">
+                </div>
+                <div class="form-group col-12">
+                  <label for="price" class="form-label">Price per item</label>
+                  <input type="text" class="form-control" id="price" placeholder="Price per item">
+                </div>
+                
+                <div class="col-12">
+                  <button type="submit" id="add_btn" class="btn btn-success">Add item</button>
+                </div>
+                <div class="alert alert-success" id="success_alert" role="alert">
+                  Product added succesfully!
+                </div>
+              </form>
+
+              <!-- display table -->
+              <table id="product_table" class="table table-success table-striped m-5">
+                <thead class="table-dark p-3">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Product Name</th>
+                      <th scope="col">Quantity in stock</th>
+                      <th scope="col">Price per item</th>
+                      <th scope="col">Datetime submitted</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <script>                                       
+                      $(document).ready(function () {
+
+                        //Fetch data from json file
+                        $.getJSON("php/file.json",
+                            function (data) {
+                          var product = '';
+                              var i = 0;
+                          //loop through objects
+                          $.each(data, function (key, value) {
+                              i++;
+                            //connect rows to json data
+                            product += '<tr>';
+                            product += '<td>' + 
+                            i + '</td>';
+                            product += '<td>' + 
+                              value.product_name + '</td>';
+                            product += '<td>' + 
+                              value.qty_stock + '</td>';
+                            product += '<td>' + 
+                              value.price + '</td>';
+                            product += '<td>' + 
+                              value.datetime + '</td>';
+                            product += '<td>' + 
+                              value.total + '</td>';
+                            product += '<td><button type="button" class="btn btn-outline-success"><a onclick="fillData(); return false;" href="#">Edit</a></button><button type="button" class="btn btn-outline-danger">Delete</button></td>';    
+                            product += '</tr>';                 
+                          });
+$('#product_table').append(product);
+                            });
+                      });
+                
+                 /*  </tbody>
+                
+              </table> */
+            </script>
+        </div>   
+  </body>
+ <!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>  -->     
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="js/common.js" type="text/javascript"></script> 
+</html>
