@@ -16,12 +16,11 @@ if(file_exists('file.json')) {
     if(file_put_contents('file.json', $new_data));
 }
 
-function fileWriteAppend() {
-    $saved_data = file_get_contents('file.json');
-    
+function checkgit(){
+    print("ok");
 }
 
-
+//function fileWriteAppend()
 
 // redirect to success page
 
