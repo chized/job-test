@@ -35,6 +35,7 @@ function submitForm(){
             //success: function(xhr, status, errorMessage) {
             success: function(data, status, xhr) {
                     alert("response was "+data);
+                    window.location.reload();
             },
             });
 }
